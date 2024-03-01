@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-4">
+    <h3>Are you sure you want to delete {{ item.item_name }}?</h3>
+    <div class="d-flex justify-content-center">
+        <form action="{% url 'food:delete_item' item.id %}" method="post" class="text-center">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-lg width-80 mt-2 mb-2 ms-1 me-1">Yes</button>
+            <a href="{% url 'food:details' item.id %}" class="btn btn-primary btn-lg width-80 mt-2 mb-2 ms-1 me-1">No</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

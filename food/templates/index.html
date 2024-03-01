@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    {% for item in all_items %}
+    <div class="row mt-4 mb-4">
+        <div class="col-md-3 offset-md-2">
+            <img class="card img-fluid" src="{{ item.item_image }}" alt="{{ item.item_name }}">
+        </div>
+        <div class="col-md-4">
+            <h3>{{ item.item_name }}</h3>
+            <h5>{{ item.item_desc }}</h5>
+            <h6>{{ item.actual_price_display }}</h6>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'food:details' item.id %}" class="btn btn-success">View</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
