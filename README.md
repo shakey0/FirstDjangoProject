@@ -4,7 +4,7 @@ After successfully completing my last major solo project, I am now embarking on 
 
 ## This Project
 
-This is a food web app using Python with Django, Bootstrap, and a tiny bit of JavaScript. My aim is to make this look like a real world web app that someone would use to manage a restaurant/takeaway or order food on.
+This is a food web app using Python with Django, Bootstrap, and a tiny bit of JavaScript. My aim is to make this look and function like a real world web app that someone would use to manage a restaurant/takeaway or order food on.
 
 <p align="center">
     <img alt="CachingProcess" src="FirstLook.png" width="100%"/>
