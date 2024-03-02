@@ -7,9 +7,9 @@ After successfully completing my last major solo project, I am now embarking on 
 This is a food web app using Python with Django, Bootstrap, and a tiny bit of JavaScript. My aim is to make this look and function like a real world web app that someone would use to manage a restaurant/takeaway or order food on.
 
 <p align="center">
-    <img alt="CachingProcess" src="FirstLook.png" width="100%"/>
+    <img alt="CachingProcess" src="IndexPage.png" width="100%"/>
 </p>
 
 <p align="center">
-    <img alt="CachingProcess" src="SignUpForm.png" width="100%"/>
+    <img alt="CachingProcess" src="RegisterPage.png" width="100%"/>
 </p>

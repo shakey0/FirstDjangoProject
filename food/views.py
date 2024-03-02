@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponse
 from .models import Item
@@ -33,7 +34,7 @@ def details(request, item_id):
     }
     return render(request, 'details.html', context)
 
-
+@login_required(login_url='/login')
 def create_item(request):
     if request.method == 'POST':
         
@@ -55,7 +56,7 @@ def create_item(request):
     
     return render(request, 'item-form.html', {'form': form})
 
-
+@login_required(login_url='/login')
 def update_item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
     if request.method == 'POST':
@@ -76,7 +77,7 @@ def update_item(request, item_id):
     
     return render(request, 'item-form.html', {'form': form, 'item': item})
 
-
+@login_required(login_url='/login')
 def delete_item(request, item_id):
     item = Item.objects.get(pk=item_id)
     
