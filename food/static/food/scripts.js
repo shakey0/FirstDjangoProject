@@ -1,4 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+    function checkNavbarClass() {
+        const navbar = document.getElementById('navbar');
+        if (window.innerWidth < 500) {
+            navbar.classList.remove('fixed-top');
+        } else {
+            if (!navbar.classList.contains('fixed-top')) {
+                navbar.classList.add('fixed-top');
+            }
+        }
+    }
+    
+    checkNavbarClass();
+    window.addEventListener('resize', checkNavbarClass);
+
+
     const inputField = document.getElementById('item-price');
 
     function formatInput(value) {

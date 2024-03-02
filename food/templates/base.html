@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{% static 'food/styles.css' %}">
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-dark fixed-top">
+        <nav class="navbar navbar-dark bg-dark fixed-top" id="navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'food:index' %}">Food App</a>
                 <ul class="nav">
@@ -28,6 +28,13 @@
                 </ul>
             </div>
         </nav>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         {% block content %}
         {% endblock %}
         <script src="{% static 'food/scripts.js' %}"></script>

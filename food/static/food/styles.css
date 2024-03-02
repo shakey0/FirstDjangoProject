@@ -2,6 +2,12 @@ body {
     padding-top: 56px;
 }
 
+@media (max-width: 500px) {
+    body {
+        padding-top: 0;
+    }
+}
+
 .link-color {
     color: rgb(0, 200, 255);
 }
@@ -21,4 +27,23 @@ body {
 
 .width-100 {
     width: 100px;
+}
+
+@media (max-width: 767px) {
+    .reduce-767 {
+        max-width: 440px;
+    }
+}
+
+.width-300 {
+    width: 300px;
+}
+
+.bottom-errors {
+    color: tomato;
+}
+
+.bottom-errors p {
+    margin-top: 5px;
+    margin-bottom: 0;
 }
