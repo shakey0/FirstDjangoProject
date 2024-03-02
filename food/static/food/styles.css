@@ -60,6 +60,9 @@ body {
 .bigger-checkbox {
     width: 24px;
     height: 24px;
-    margin-left: 5px;
     cursor: pointer;
+}
+
+.left-5px {
+    margin-left: 5px;
 }

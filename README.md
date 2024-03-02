@@ -9,3 +9,7 @@ This is a food web app using Python with Django, Bootstrap, and a tiny bit of Ja
 <p align="center">
     <img alt="CachingProcess" src="FirstLook.png" width="100%"/>
 </p>
+<br><br>
+<p align="center">
+    <img alt="CachingProcess" src="SignUpForm.png" width="100%"/>
+</p>
