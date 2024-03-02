@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -39,3 +40,8 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'You have been logged out')
     return redirect('food:index')
+
+
+@login_required(login_url='/login')
+def user_profile(request):
+    return render(request, 'user-profile.html')
