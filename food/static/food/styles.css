@@ -47,3 +47,19 @@ body {
     margin-top: 5px;
     margin-bottom: 0;
 }
+
+.padding-12 {
+    padding: 12px;
+}
+
+.red-background {
+    background-color: rgb(255, 215, 208);
+    border: 1px solid rgb(255, 179, 165);
+}
+
+.bigger-checkbox {
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    cursor: pointer;
+}
