@@ -9,11 +9,11 @@ body {
 }
 
 .link-color {
-    color: rgb(150, 198, 235);
+    color: #ffffff;
 }
 
 .link-color:hover {
-    color: rgb(211, 224, 234);
+    color: rgb(255, 255, 127);
 }
 
 .form-max-width {

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.http import HttpResponse
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 from .models import Item
 from .forms import ItemForm
 
@@ -12,27 +13,27 @@ def get_actual_price(price):
     return price
 
 
-def index(request):
-    all_items_ordered = Item.objects.order_by('item_name')
-    all_items = list(all_items_ordered)
-    for item in all_items:
-        item.actual_price_display = get_actual_price(item.item_price)
-    context = {
-        'all_items': all_items
-    }
-    return render(request, 'index.html', context)
+class IndexClassView(ListView):
+    model = Item
+    template_name = 'index.html'
+    context_object_name = 'all_items'
+
+    def get_queryset(self):
+        queryset = super().get_queryset().order_by('item_name')
+        for item in queryset:
+            item.actual_price_display = get_actual_price(item.item_price)
+        return queryset
 
 
-def details(request, item_id):
-    try:
-        item = Item.objects.get(pk=item_id)
-    except Item.DoesNotExist:
-        return HttpResponse('No item found')
-    item.item_price = get_actual_price(item.item_price)
-    context = {
-        'item': item
-    }
-    return render(request, 'details.html', context)
+class FoodDetail(DetailView):
+    model = Item
+    template_name = 'details.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item'].item_price = get_actual_price(context['item'].item_price)
+        return context
+
 
 @login_required(login_url='/login')
 def create_item(request):
@@ -56,6 +57,7 @@ def create_item(request):
     
     return render(request, 'item-form.html', {'form': form})
 
+
 @login_required(login_url='/login')
 def update_item(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
@@ -70,12 +72,13 @@ def update_item(request, item_id):
         form = ItemForm(post_data, instance=item)
         if form.is_valid():
             form.save()
-            return redirect(reverse('food:details', kwargs={'item_id': item_id}))
+            return redirect(reverse('food:details', kwargs={'pk': item_id}))
     else:
         item.item_price = get_actual_price(item.item_price)
         form = ItemForm(instance=item)
     
     return render(request, 'item-form.html', {'form': form, 'item': item})
+
 
 @login_required(login_url='/login')
 def delete_item(request, item_id):
