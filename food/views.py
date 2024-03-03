@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 from .models import Item
 from .forms import ItemForm
 
@@ -35,27 +38,30 @@ class FoodDetail(DetailView):
         return context
 
 
-@login_required(login_url='/login')
-def create_item(request):
-    if request.method == 'POST':
-        
+class ItemCreateView(LoginRequiredMixin, CreateView):
+    model = Item
+    form_class = ItemForm
+    template_name = 'item-form.html'
+    success_url = reverse_lazy('food:index')
+    
+    def get_initial(self):
+        return {'item_image': ''}
+    
+    def post(self, request, *args, **kwargs):
         post_data = request.POST.copy()
         item_price = post_data.get('item_price', '')
         if item_price.startswith('£'):
-            post_data['item_price'] = item_price.replace('£', '').strip()
-            post_data['item_price'] = int(round(float(post_data['item_price']) * 100))
+            item_price = item_price.replace('£', '').strip()
+            post_data['item_price'] = int(round(float(item_price) * 100))
         
-        form = ItemForm(post_data)
-        if form.is_valid():
-            item = form.save(commit=False)  # Create an item instance but don't save it to the database yet
-            if not item.item_image:  # Check if the item_image field is empty
-                item.item_image = 'https://convida.pt/images/POIs/Restaurantes_01.jpg'  # Set the default URL
-            item.save()  # Save the item to the database
-            return redirect('food:index')
-    else:
-        form = ItemForm(initial={'item_image': ''})
-    
-    return render(request, 'item-form.html', {'form': form})
+        request.POST = post_data
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        if not form.instance.item_image:
+            form.instance.item_image = 'https://convida.pt/images/POIs/Restaurantes_01.jpg'
+        return super().form_valid(form)
+
 
 
 @login_required(login_url='/login')
