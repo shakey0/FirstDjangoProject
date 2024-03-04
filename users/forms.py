@@ -33,3 +33,7 @@ class LoginForm(forms.Form):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class ProfilePictureForm(forms.Form):
+    profile_picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}))

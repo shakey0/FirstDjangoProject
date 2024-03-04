@@ -1,2 +1,24 @@
-<h1>{{ user.username }}</h1>
-<img src="{{ user.profile.image.url }}" alt="{{ user.username }}">
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid mt-3 profile-max-width">
+    <div class="row">
+        <div class="col-md-7 d-flex flex-column align-items-center">
+            <img src="{{ user.profile.image.url }}" alt="{{ user.username }}" class="rounded border border-secondary p-2 mb-2" style="width: auto; max-width: 100%; height: auto;">
+            <div class="w-100 mb-1">
+                <form method="post" enctype="multipart/form-data" action="/upload-profile-picture/">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-primary mt-1">Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="rounded border border-secondary p-2 ps-3 mt-767">
+                <h1>{{ user.username }}</h1>
+                <p class="mb-1">{{ user.profile.location }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

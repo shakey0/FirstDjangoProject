@@ -21,6 +21,11 @@ body {
     max-width: 720px;
 }
 
+.form-login-max-width {
+    width: 90%;
+    max-width: 430px;
+}
+
 .single-item-max-width {
     max-width: 1120px;
 }
@@ -85,4 +90,24 @@ body {
     .inferior-text {
         font-size: 1em;
     }
+}
+
+.profile-max-width {
+    max-width: 800px;
+}
+@media (max-width: 767px) {
+    .profile-max-width {
+        max-width: 500px;
+    }
+    .mt-767 {
+        margin-top: 10px;
+    }
+}
+
+.bg-lightgray {
+    background-color: #cccccc;
+}
+
+.bg-lightgray:hover {
+    background-color: #b3b3b3;
 }

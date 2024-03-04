@@ -27,6 +27,7 @@ urlpatterns = [
     path('login/', user_views.login, name='login'),
     path('logout/', user_views.logout_view, name='logout'),
     path('profile/', user_views.user_profile, name='profile'),
+    path('upload-profile-picture/', user_views.upload_profile_picture, name='upload-profile-picture'),
 ]
 
 urlpatterns += [

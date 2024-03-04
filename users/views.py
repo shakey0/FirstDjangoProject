@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as auth_login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, ProfilePictureForm
+from django.views.generic import TemplateView
 
 
 def register(request):
@@ -44,4 +45,16 @@ def logout_view(request):
 
 @login_required(login_url='/login')
 def user_profile(request):
-    return render(request, 'user-profile.html')
+    form = ProfilePictureForm()
+    return render(request, 'user-profile.html', {'form': form})
+
+
+@login_required(login_url='/login')
+def upload_profile_picture(request):
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            request.user.profile.image = form.cleaned_data.get('profile_picture')
+            request.user.profile.save()
+            messages.success(request, 'Profile picture uploaded successfully')
+            return redirect('profile')
