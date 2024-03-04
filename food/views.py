@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Item
@@ -39,7 +38,6 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = ItemForm
     template_name = 'item-form.html'
-    success_url = reverse_lazy('food:index')
     
     def get_initial(self):
         return {'item_image': ''}
@@ -55,6 +53,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         if not form.instance.item_image:
             form.instance.item_image = 'https://convida.pt/images/POIs/Restaurantes_01.jpg'
         return super().form_valid(form)
@@ -64,9 +63,6 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
     form_class = ItemForm
     template_name = 'item-form.html'
-    
-    def get_success_url(self):
-        return reverse('food:details', kwargs={'pk': self.object.pk})
 
     def get_initial(self):
         return {'item_price': get_actual_price(self.object.item_price)}

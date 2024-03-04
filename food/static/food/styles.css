@@ -66,3 +66,23 @@ body {
 .left-5px {
     margin-left: 5px;
 }
+
+.inferior-text {
+    color: #6c757d;
+    font-style: italic;
+}
+@media (max-width: 500px) {
+    .inferior-text {
+        font-size: 1.2em;
+    }
+}
+@media (max-width: 430px) {
+    .inferior-text {
+        font-size: 1.1em;
+    }
+}
+@media (max-width: 360px) {
+    .inferior-text {
+        font-size: 1em;
+    }
+}

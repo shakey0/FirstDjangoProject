@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content%}
-<div class="container single-item-max-width mt-3 mb-3">
+<div class="container single-item-max-width reduce-767 mt-3 mb-3">
     <div class="row">
         <div class="col-md-6">
             <img class="card img-fluid" src="{{ object.item_image }}" alt="{{ object.item_name }}">
@@ -9,7 +9,9 @@
         <div class="col-md-6">
             <h1>{{ object.item_name }}</h1>
             <h2>{{ object.item_desc }}</h2>
-            <h3>{{ object.item_price }}</h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <h3>{{ object.item_price }}</h3><h5 class="inferior-text me-2">Posted by: {{ item.user }}</h5>
+            </div>
             <a class="btn btn-primary mt-2 me-1" href="{% url 'food:update_item' object.id %}">Update</a>
             <a class="btn btn-danger mt-2" href="{% url 'food:delete_item' object.id %}">Delete</a>            
         </div>
