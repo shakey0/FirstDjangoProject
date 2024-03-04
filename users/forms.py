@@ -29,10 +29,6 @@ class LoginForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter password'}))
     remember_me = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'form-check-input bigger-checkbox left-5px'}))
-    
-    class Meta:
-        model = User
-        fields = ['username', 'password']
 
 
 class ProfilePictureForm(forms.Form):
